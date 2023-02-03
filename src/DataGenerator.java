@@ -22,13 +22,6 @@ public class DataGenerator {
         StaticConstants.CUSTOMER_LIST.add(customer1);
         StaticConstants.CUSTOMER_LIST.add(customer2);
 
-
-
-
-
-
-
-
     }
 
 
