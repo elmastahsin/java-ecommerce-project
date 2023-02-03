@@ -18,6 +18,17 @@ public class DataGenerator {
 
         Customer customer1 = new Customer(UUID.randomUUID(),"ozzy","ozzy@cydeo.com",customer1AddressList);
         Customer customer2 = new Customer(UUID.randomUUID(),"mike","mike@gmail.com");
+
+        StaticConstants.CUSTOMER_LIST.add(customer1);
+        StaticConstants.CUSTOMER_LIST.add(customer2);
+
+
+
+
+
+
+
+
     }
 
 
