@@ -1,6 +1,7 @@
 package category;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Electronic extends Category{
@@ -9,9 +10,13 @@ public class Electronic extends Category{
     }
 
     @Override
-    public LocalDate calculateDeliveryTime() {
-        return null;
+    public LocalDateTime calculateDeliveryTime() {
+        LocalDateTime localDateTime= LocalDateTime.now();
+        return localDateTime.plusDays(4);
     }
 
-
+    @Override
+    public String generateCategoryCode() {
+        return "EL-" + getId().toString().substring(0,8);
+    }
 }
