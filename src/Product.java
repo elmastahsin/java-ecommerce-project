@@ -4,10 +4,43 @@ import java.util.UUID;
 
 public class Product {
     UUID id;
-    private String productName;
-    private double price;
-    private int stock;
-    private Category category;
+    private String name;
+    private Double price;
+    private Integer stock;
+    private Integer remainingStock;
 
+    private UUID categoryId;
 
+    public Product(UUID id, String name, Double price, Integer stock, Integer remainingStock, UUID categoryId) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.remainingStock = remainingStock;
+        this.categoryId = categoryId;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public Integer getRemainingStock() {
+        return remainingStock;
+    }
+
+    public UUID getCategoryId() {
+        return categoryId;
+    }
 }
