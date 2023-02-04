@@ -5,6 +5,9 @@ import category.Category;
 import category.Electronic;
 import category.Furniture;
 import category.SkinCare;
+import discount.AmountBasedDiscount;
+import discount.Discount;
+import discount.RateBasedDiscount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +36,13 @@ public class DataGenerator {
 
     public static void createProduct() {
         Product product1 =
-                new Product(UUID.randomUUID(),"PS5",230.72,7,7,StaticConstants.CATEGORY_LIST.get(0).getId());
+                new Product(UUID.randomUUID(), "PS5", 230.72, 7, 7, StaticConstants.CATEGORY_LIST.get(0).getId());
         Product product2 =
-                new Product(UUID.randomUUID(),"XBOX",120.34,15,15,StaticConstants.CATEGORY_LIST.get(0).getId());
-        Product product3=
-                new Product(UUID.randomUUID(),"Chair",30.87,85,85,StaticConstants.CATEGORY_LIST.get(1).getId());
-        Product product4=
-                new Product(UUID.randomUUID(),"Milk",2.87,185,85,UUID.randomUUID());
+                new Product(UUID.randomUUID(), "XBOX", 120.34, 15, 15, StaticConstants.CATEGORY_LIST.get(0).getId());
+        Product product3 =
+                new Product(UUID.randomUUID(), "Chair", 30.87, 85, 85, StaticConstants.CATEGORY_LIST.get(1).getId());
+        Product product4 =
+                new Product(UUID.randomUUID(), "Milk", 2.87, 185, 85, UUID.randomUUID());
         StaticConstants.PRODUCT_LIST.add(product1);
         StaticConstants.PRODUCT_LIST.add(product2);
         StaticConstants.PRODUCT_LIST.add(product3);
@@ -62,14 +65,19 @@ public class DataGenerator {
 
     }
 
-    public static void createBalance(){
-        Balance customerBalance = new CustomerBalance(StaticConstants.CUSTOMER_LIST.get(0).getId(),450.00);
-        Balance giftCardBalance = new GiftCardBalance(StaticConstants.CUSTOMER_LIST.get(1).getId(),500.00);
+    public static void createBalance() {
+        Balance customerBalance = new CustomerBalance(StaticConstants.CUSTOMER_LIST.get(0).getId(), 450.00);
+        Balance giftCardBalance = new GiftCardBalance(StaticConstants.CUSTOMER_LIST.get(1).getId(), 500.00);
 
         StaticConstants.CUSTOMER_BALANCE_LIST.add(customerBalance);
         StaticConstants.GIFT_CARD_BALANCE_LIST.add(giftCardBalance);
     }
 
     public static void createDiscount() {
+        Discount amountBasedDiscount = new AmountBasedDiscount(UUID.randomUUID(), "Buy 250 Free 50", 250.00, 50.00);
+        Discount rateBasedDiscount = new RateBasedDiscount(UUID.randomUUID(), "Buy 500 Free %15", 500.00, 15.00);
+
+        StaticConstants.DISCOUNT_LIST.add(amountBasedDiscount);
+        StaticConstants.DISCOUNT_LIST.add(rateBasedDiscount);
     }
 }
