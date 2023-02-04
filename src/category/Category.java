@@ -13,7 +13,7 @@ public abstract class Category {
         this.id = id;
         this.name = name;
     }
-    public abstract LocalDateTime calculateDeliveryTime();
+    public abstract LocalDateTime findDeliveryTime();
     public  String generateCategoryCode(){
         return id.toString().substring(0,8).concat("-").concat(name.substring(0,2));
     }

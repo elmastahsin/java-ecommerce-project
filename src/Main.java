@@ -4,6 +4,8 @@ import balance.GiftCardBalance;
 import category.Category;
 import discount.Discount;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -29,6 +31,7 @@ public class Main {
         }
 
         Customer customer = StaticConstants.CUSTOMER_LIST.get(scanner.nextInt());
+        Card card = new Card(customer);
         while (true) {
             System.out.println("What would you like to do? Just type id for selection");
 
@@ -88,6 +91,23 @@ public class Main {
                     }
                     break;
                 case 5:
+                    Map<Product,Integer> map = new HashMap<>();
+                    card.setProductMap(map);
+                    while (true){
+                        System.out.println("Which product you want to add to cart. For exit product selection type: exit");
+                        for (Product product : StaticConstants.PRODUCT_LIST) {
+                            try {
+                                System.out.println("id: " + product.getId()
+                                        + " price: " + product.getPrice() +" product category: "
+                                        +product.getCategoryName()
+                                        + " stock: " + product.getRemainingStock() +
+                                        "product delivery due: "
+                                        + product.getDeliveryDueDate());
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                    }
 
                     break;
                 case 6:
