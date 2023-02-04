@@ -1,8 +1,10 @@
+import balance.Balance;
+import balance.CustomerBalance;
+import balance.GiftCardBalance;
 import category.Category;
 import category.Electronic;
 import category.Furniture;
 import category.SkinCare;
-import org.w3c.dom.ls.LSInput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +62,12 @@ public class DataGenerator {
 
     }
 
-    public static void createBalance() {
+    public static void createBalance(){
+        Balance customerBalance = new CustomerBalance(StaticConstants.CUSTOMER_LIST.get(0).getId(),450.00);
+        Balance giftCardBalance = new GiftCardBalance(StaticConstants.CUSTOMER_LIST.get(1).getId(),500.00);
+
+        StaticConstants.CUSTOMER_BALANCE_LIST.add(customerBalance);
+        StaticConstants.GIFT_CARD_BALANCE_LIST.add(giftCardBalance);
     }
 
     public static void createDiscount() {
