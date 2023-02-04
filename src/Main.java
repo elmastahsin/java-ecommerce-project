@@ -91,15 +91,15 @@ public class Main {
                     }
                     break;
                 case 5:
-                    Map<Product,Integer> map = new HashMap<>();
+                    Map<Product, Integer> map = new HashMap<>();
                     card.setProductMap(map);
-                    while (true){
+                    while (true) {
                         System.out.println("Which product you want to add to cart. For exit product selection type: exit");
                         for (Product product : StaticConstants.PRODUCT_LIST) {
                             try {
                                 System.out.println("id: " + product.getId()
-                                        + " price: " + product.getPrice() +" product category: "
-                                        +product.getCategoryName()
+                                        + " price: " + product.getPrice() + " product category: "
+                                        + product.getCategoryName()
                                         + " stock: " + product.getRemainingStock() +
                                         "product delivery due: "
                                         + product.getDeliveryDueDate());
@@ -107,7 +107,18 @@ public class Main {
                                 System.out.println(e.getMessage());
                             }
                         }
+                        String productId = scanner.next();
+                        try {
+                            Product product = findProductId(productId);
+                            if (!putItemToCardIfStockAvailable(card, product)) {
+
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Product does not exist. please try again");
+                            continue;
+                        }
                     }
+
 
                     break;
                 case 6:
@@ -124,6 +135,15 @@ public class Main {
 
 
         }
+    }
+
+    private static Product findProductId(String productId) throws Exception {
+        for (Product product : StaticConstants.PRODUCT_LIST) {
+            if (product.getId().toString().equals(productId))
+                return product;
+        }
+        throw new Exception("Product not found");
+
     }
 
     private static GiftCardBalance findGiftCardBalance(UUID id) {
