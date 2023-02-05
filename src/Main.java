@@ -42,15 +42,13 @@ public class Main {
             switch (menuSelection) {
                 case 0:
                     for (Category category : StaticConstants.CATEGORY_LIST) {
-                        System.out.println("Category code " + category.generateCategoryCode()
-                                + " category name" + category.getName());
+                        System.out.println("Category code " + category.generateCategoryCode() + " category name" + category.getName());
                     }
                     break;
                 case 1:
                     try {
                         for (Product product : StaticConstants.PRODUCT_LIST) {
-                            System.out.println("Product name " + product.getName()
-                                    + " product category name " + product.getCategoryName());
+                            System.out.println("Product name " + product.getName() + " product category name " + product.getCategoryName());
                         }
                     } catch (Exception e) {
                         System.err.println("Product could not printed because category not found for product name: " + e.getMessage().split(",")[1]);
@@ -97,12 +95,7 @@ public class Main {
                         System.out.println("Which product you want to add to cart. For exit product selection type: exit");
                         for (Product product : StaticConstants.PRODUCT_LIST) {
                             try {
-                                System.out.println("id: " + product.getId()
-                                        + " price: " + product.getPrice() + " product category: "
-                                        + product.getCategoryName()
-                                        + " stock: " + product.getRemainingStock() +
-                                        "product delivery due: "
-                                        + product.getDeliveryDueDate());
+                                System.out.println("id: " + product.getId() + " price: " + product.getPrice() + " product category: " + product.getCategoryName() + " stock: " + product.getRemainingStock() + "product delivery due: " + product.getDeliveryDueDate());
                             } catch (Exception e) {
                                 System.out.println(e.getMessage());
                             }
@@ -111,11 +104,17 @@ public class Main {
                         try {
                             Product product = findProductId(productId);
                             if (!putItemToCardIfStockAvailable(card, product)) {
-
+                                System.out.println("Stock is insufficient. Please try again");
+                                continue;
                             }
                         } catch (Exception e) {
                             System.out.println("Product does not exist. please try again");
                             continue;
+                        }
+                        System.out.println("Dou you want to add more product?Type Y for adding more, N for exit");
+                        String decision = scanner.next();
+                        if (!decision.equals("Y")) {
+                            break;
                         }
                     }
 
@@ -137,10 +136,27 @@ public class Main {
         }
     }
 
+    private static boolean putItemToCardIfStockAvailable(Card card, Product product) {
+        System.out.println("Please provide product count: ");
+        Scanner scanner = new Scanner(System.in);
+        int count = scanner.nextInt();
+
+        Integer cardCount = card.getProductMap().get(product);
+
+        if (cardCount != null && product.getRemainingStock() > cardCount + count) {
+            card.getProductMap().put(product, cardCount + count);
+            return true;
+        } else if (product.getRemainingStock() > count) {
+            card.getProductMap().put(product, count);
+            return true;
+        }
+        return false;
+
+    }
+
     private static Product findProductId(String productId) throws Exception {
         for (Product product : StaticConstants.PRODUCT_LIST) {
-            if (product.getId().toString().equals(productId))
-                return product;
+            if (product.getId().toString().equals(productId)) return product;
         }
         throw new Exception("Product not found");
 
